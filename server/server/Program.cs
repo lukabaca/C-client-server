@@ -10,6 +10,8 @@ namespace server
     {
         static void Main(string[] args)
         {
+            String localAddress = "127.0.0.1";
+            Server server = new Server(localAddress, 5000);
         }
     }
 }

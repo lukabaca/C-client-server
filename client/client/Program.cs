@@ -10,7 +10,8 @@ namespace client
     {
         static void Main(string[] args)
         {
-
+            String localAddress = "127.0.0.1";
+            Client client = new Client(localAddress, 5000);
         }
     }
 }
