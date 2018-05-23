@@ -11,7 +11,7 @@ namespace fileTransferSpace
 {
 
     [Serializable]
-    public class FileTransfer
+    public class FileTransfer 
     {
         /*
         private String fileName { get; set; }
@@ -57,5 +57,7 @@ namespace fileTransferSpace
                 b = value;
             }
         }
+
+        
     }
 }

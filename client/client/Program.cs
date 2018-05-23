@@ -12,6 +12,10 @@ namespace client
         {
             String localAddress = "127.0.0.1";
             Client client = new Client(localAddress, 5000);
+
+            client.sendFile(new FileTransfer("ala", "kotek"));
+
+            Console.ReadLine();
         }
     }
 }

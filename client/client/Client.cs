@@ -20,11 +20,18 @@ namespace client
 
         public void sendFile(FileTransfer file)
         {
-            FileTransfer a = new FileTransfer("a", "b");
+            //FileTransfer a = new FileTransfer("ala", "kotek");
 
             NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
-
-            bFormatter.Serialize(ntwStream, a);
+            try
+            {
+                bFormatter.Serialize(ntwStream, file);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
         }
 
         public TcpClient SocketForServer

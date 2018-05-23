@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using fileTransferSpace;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace server
 {
@@ -10,7 +11,7 @@ namespace server
     {
         private int serverPort;
         private IPAddress serverAddr;
-
+        private BinaryFormatter bFormatter;
         private TcpListener serverSocket;
 
 
@@ -25,6 +26,7 @@ namespace server
             this.serverSocket.Start();
 
             this.isRunning = true;
+            this.bFormatter = new BinaryFormatter();
 
             Console.WriteLine("Server is working at port: " + serverPort);
 
@@ -33,6 +35,8 @@ namespace server
 
         private void waitForClients()
         {
+           
+            
             while(isRunning)
             {
                 Console.WriteLine("Server is waiting for clients...");
@@ -40,9 +44,11 @@ namespace server
                 Console.WriteLine("Client was found: ");
                 
                 Thread thread = new Thread(() => handleClient(client));
+                
                 thread.Start();
                 
             }
+            
 
             serverSocket.Stop();
         }
@@ -50,9 +56,21 @@ namespace server
         private void handleClient(TcpClient client)
         {
             Console.WriteLine("TU zrob obsluge clienta poszczegolnego");
-            TcpClient newClient = client;
+            //TcpClient newClient = client;
+            try
+            {
+                //NetworkStream ntwStream = client.G
+                FileTransfer file = (FileTransfer)this.bFormatter.Deserialize(client.GetStream());
 
-            FileTransfer file = new FileTransfer("a", "b");
+                Console.WriteLine(file.A);
+                Console.WriteLine(file.B);
+                
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
         }
     }
 }
