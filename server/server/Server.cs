@@ -65,8 +65,8 @@ namespace server
                 IFormatter formater = bFormatter;
                 FileTransfer file = (FileTransfer) formater.Deserialize(client.GetStream());
 
-                Console.WriteLine(file.A);
-                Console.WriteLine(file.B);
+                Console.WriteLine(file.FileName);
+                //Console.WriteLine(file.B);
                 
 
             }catch(Exception e)

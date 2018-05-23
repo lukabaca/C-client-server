@@ -13,51 +13,45 @@ namespace fileTransferSpace
     [Serializable]
     public class FileTransfer 
     {
-        /*
-        private String fileName { get; set; }
-        private byte[] file { get; set; }
+
+        private String fileName;
+        private byte[] file;
 
         public FileTransfer(String fileName, byte[] fileTarget)
         {
             this.fileName = fileName;
+            this.file = new Byte[fileTarget.Length];
             Array.Copy(file, fileTarget, fileTarget.Length);
         }
-        */
-        private String a;
-        private String b;
-
-        public FileTransfer(String a, String b)
-        {
-            this.a = a;
-            this.b = b;
-        }
-
-        public string A
+        public string FileName
         {
             get
             {
-                return a;
+                return fileName;
             }
 
             set
             {
-                a = value;
+                fileName = value;
             }
         }
 
-        public string B
+        public byte[] File
         {
             get
             {
-                return b;
+                return file;
             }
 
             set
             {
-                b = value;
+                file = value;
             }
         }
 
+        
+        
+       
         
     }
 }
