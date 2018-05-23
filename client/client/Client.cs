@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using fileTransferSpace;
+using System.Runtime.Serialization;
 
 namespace client
 {
@@ -25,7 +26,8 @@ namespace client
             NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
             try
             {
-                bFormatter.Serialize(ntwStream, file);
+                IFormatter formater = bFormatter;
+                formater.Serialize(ntwStream, file);
             }
             catch (Exception e)
             {

@@ -2,8 +2,10 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using fileTransferSpace;
+
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using fileTransferSpace;
 
 namespace server
 {
@@ -60,7 +62,8 @@ namespace server
             try
             {
                 //NetworkStream ntwStream = client.G
-                FileTransfer file = (FileTransfer)this.bFormatter.Deserialize(client.GetStream());
+                IFormatter formater = bFormatter;
+                FileTransfer file = (FileTransfer) formater.Deserialize(client.GetStream());
 
                 Console.WriteLine(file.A);
                 Console.WriteLine(file.B);
@@ -68,6 +71,7 @@ namespace server
 
             }catch(Exception e)
             {
+                Console.WriteLine("Error in server side when deserializating");
                 Console.WriteLine(e);
                 Console.ReadLine();
             }
