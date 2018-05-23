@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace client
+namespace FileTransfer
 {
+    
     [Serializable]
-    class FileTransfer 
+    public class FileTransfer
     {
         /*
         private String fileName { get; set; }
@@ -31,5 +30,9 @@ namespace client
 
 
 
+    }
+
+    internal class SerializableAttribute : Attribute
+    {
     }
 }
