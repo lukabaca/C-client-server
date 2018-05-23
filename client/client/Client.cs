@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
+using fileTransferSpace;
 
 namespace client
 {
@@ -23,7 +20,11 @@ namespace client
 
         public void sendFile(FileTransfer file)
         {
+            FileTransfer a = new FileTransfer("a", "b");
 
+            NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
+
+            bFormatter.Serialize(ntwStream, a);
         }
 
         public TcpClient SocketForServer

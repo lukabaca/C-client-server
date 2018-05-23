@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
+using fileTransferSpace;
 
 namespace server
 {
@@ -51,6 +51,8 @@ namespace server
         {
             Console.WriteLine("TU zrob obsluge clienta poszczegolnego");
             TcpClient newClient = client;
+
+            FileTransfer file = new FileTransfer("a", "b");
         }
     }
 }

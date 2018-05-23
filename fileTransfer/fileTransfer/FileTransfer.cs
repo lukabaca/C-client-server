@@ -7,11 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace FileTransfer
+namespace fileTransferSpace
 {
 
     [Serializable]
-    class FileTransfer
+    public class FileTransfer
     {
         /*
         private String fileName { get; set; }
@@ -23,8 +23,8 @@ namespace FileTransfer
             Array.Copy(file, fileTarget, fileTarget.Length);
         }
         */
-        String a;
-        String b;
+        private String a;
+        private String b;
 
         public FileTransfer(String a, String b)
         {
@@ -32,7 +32,30 @@ namespace FileTransfer
             this.b = b;
         }
 
+        public string A
+        {
+            get
+            {
+                return a;
+            }
 
+            set
+            {
+                a = value;
+            }
+        }
 
+        public string B
+        {
+            get
+            {
+                return b;
+            }
+
+            set
+            {
+                b = value;
+            }
+        }
     }
 }
