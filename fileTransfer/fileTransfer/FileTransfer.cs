@@ -20,8 +20,9 @@ namespace fileTransferSpace
         public FileTransfer(String fileName, byte[] fileTarget)
         {
             this.fileName = fileName;
-            this.file = new Byte[fileTarget.Length];
-            Array.Copy(file, fileTarget, fileTarget.Length);
+            //this.file = new Byte[fileTarget.Length];
+            this.file = fileTarget.ToArray();
+            //Array.Copy(file, fileTarget, fileTarget.Length);
         }
         public string FileName
         {

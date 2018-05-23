@@ -6,6 +6,7 @@ using System.Threading;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using fileTransferSpace;
+using System.Text;
 
 namespace server
 {
@@ -66,10 +67,22 @@ namespace server
                 FileTransfer file = (FileTransfer) formater.Deserialize(client.GetStream());
 
                 Console.WriteLine(file.FileName);
-                //Console.WriteLine(file.B);
-                
+                Console.WriteLine(Encoding.UTF8.GetString(file.File));
+                try
+                {
+                    System.IO.File.WriteAllBytes(file.FileName, file.File);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Writing to the file was not succesful");
+                    Console.WriteLine(e);
+                }
 
-            }catch(Exception e)
+                //Console.WriteLine(file.B);
+
+
+            }
+            catch(Exception e)
             {
                 Console.WriteLine("Error in server side when deserializating");
                 Console.WriteLine(e);

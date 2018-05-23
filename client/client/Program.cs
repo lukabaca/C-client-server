@@ -20,6 +20,7 @@ namespace client
             {
                 String fileName = "test.txt";
                 byte[] bytes = System.IO.File.ReadAllBytes(fileName);
+                //Console.WriteLine(Encoding.UTF8.GetString(bytes));
 
                 FileTransfer file = new FileTransfer(fileName, bytes);
 

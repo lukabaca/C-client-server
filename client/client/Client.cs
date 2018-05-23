@@ -34,6 +34,7 @@ namespace client
                 Console.WriteLine(e);
                 Console.ReadLine();
             }
+            Console.WriteLine("A file with filename: " + file.FileName + " has been sent");
         }
 
         public TcpClient SocketForServer
