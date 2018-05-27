@@ -15,9 +15,10 @@ namespace server
     {
         private int serverPort;
         private IPAddress serverAddr;
-        private BinaryFormatter bFormatter;
+        
         private TcpListener serverSocket;
 
+        private CustomFormatter formatter;
 
         private Boolean isRunning;
 
@@ -30,7 +31,7 @@ namespace server
             this.serverSocket.Start();
 
             this.isRunning = true;
-            this.bFormatter = new BinaryFormatter();
+            this.formatter = new CustomFormatter();
 
             Console.WriteLine("Server is working at port: " + serverPort);
 
@@ -75,26 +76,15 @@ namespace server
 
         private void handleClient(TcpClient client)
         {
-            
+
             //TcpClient newClient = client;
-            try
-            {
-                //NetworkStream ntwStream = client.G
-                IFormatter formater = bFormatter;
-                FileTransfer file = (FileTransfer) formater.Deserialize(client.GetStream());
 
-                Console.WriteLine(file.FileName);
+            NetworkStream ntwStream = client.GetStream();
+            FileTransfer file = formatter.deserialize(ntwStream);
+
+            if (file != null)
+            {
                 writeToFile(file);
-
-                //Console.WriteLine(file.B);
-
-
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Error in server side when deserializating");
-                Console.WriteLine(e);
-                Console.ReadLine();
             }
         }
 
