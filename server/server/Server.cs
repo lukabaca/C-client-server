@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using fileTransferSpace;
 using System.Text;
+using System.IO;
 
 namespace server
 {
@@ -36,6 +37,22 @@ namespace server
             waitForClients();
         }
 
+        private void writeToFile(FileTransfer file)
+        {
+            try
+            {
+                System.IO.File.WriteAllBytes(file.FileName, file.File);
+
+                Console.WriteLine("Utworzono plik o nazwie: " + file.FileName);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Writing to the file was not succesful");
+                Console.WriteLine(e);
+            }
+
+        }
+
         private void waitForClients()
         {
            
@@ -58,7 +75,7 @@ namespace server
 
         private void handleClient(TcpClient client)
         {
-            Console.WriteLine("TU zrob obsluge clienta poszczegolnego");
+            
             //TcpClient newClient = client;
             try
             {
@@ -67,16 +84,7 @@ namespace server
                 FileTransfer file = (FileTransfer) formater.Deserialize(client.GetStream());
 
                 Console.WriteLine(file.FileName);
-                Console.WriteLine(Encoding.UTF8.GetString(file.File));
-                try
-                {
-                    System.IO.File.WriteAllBytes(file.FileName, file.File);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Writing to the file was not succesful");
-                    Console.WriteLine(e);
-                }
+                writeToFile(file);
 
                 //Console.WriteLine(file.B);
 
@@ -89,5 +97,7 @@ namespace server
                 Console.ReadLine();
             }
         }
+
+       
     }
 }

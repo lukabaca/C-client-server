@@ -9,32 +9,37 @@ namespace client
     class Client
     {
         private TcpClient clientSocket;
-        private BinaryFormatter bFormatter;
+        private CustomFormatter formatter;
 
-        public Client(String serverIpAddress, int portNumber)
+        public Client()
         {
             clientSocket = new TcpClient();
-            clientSocket.Connect(serverIpAddress, portNumber);
 
-            bFormatter = new BinaryFormatter();
+            formatter = new CustomFormatter();
+        }
+
+        public Boolean connectToServer(String serverIpAddress, int portNumber)
+        {
+            try
+            {
+                clientSocket.Connect(serverIpAddress, portNumber);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occured while connecting to server");
+                return false;
+            }
         }
 
         public void sendFile(FileTransfer file)
         {
-            //FileTransfer a = new FileTransfer("ala", "kotek");
-
+            
             NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
-            try
+            if (formatter.serialize(ntwStream, file))
             {
-                IFormatter formater = bFormatter;
-                formater.Serialize(ntwStream, file);
+                Console.WriteLine("A file with filename: " + file.FileName + " has been sent");
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                Console.ReadLine();
-            }
-            Console.WriteLine("A file with filename: " + file.FileName + " has been sent");
         }
 
         public TcpClient SocketForServer

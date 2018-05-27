@@ -13,12 +13,20 @@ namespace client
         static void Main(string[] args)
         {
             String localAddress = "127.0.0.1";
-            Client client = new Client(localAddress, 5000);
+            Client client = new Client();
+            if(!client.connectToServer(localAddress, 5000))
+            {
+                Console.ReadLine();
+                return;
+            }
 
-            //testowo tutaj poki co
+            String fileName = "test.txt";
+
             try
             {
-                String fileName = "test.txt";
+
+                
+
                 byte[] bytes = System.IO.File.ReadAllBytes(fileName);
                 //Console.WriteLine(Encoding.UTF8.GetString(bytes));
 
